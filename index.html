@@ -263,15 +263,17 @@
           <div class="timeline-dot"></div>
           <div class="timeline-card">
             <div class="tcard-header">
-              <span class="tcard-type work" data-i18n="exp.work">Work</span>
+              <span class="tcard-type work" data-i18n="exp.internship">Internship</span>
               <span class="tcard-date">Feb 2026 – Jun 2026</span>
             </div>
-            <h3 class="tcard-title" data-i18n="exp.pfe.title">Final-Year Project Intern (PFE)</h3>
+            <h3 class="tcard-title" data-i18n="exp.pfe.title">Final-Year Project Internship (PFE)</h3>
             <span class="tcard-org">Tunisie Telecom · Tunis, Tunisia</span>
             <ul class="tcard-bullets">
-              <li data-i18n-html="exp.pfe.b1">Designed a complete decision-support system using <strong>CRISP-DM</strong> methodology for customer churn prediction.</li>
-              <li data-i18n-html="exp.pfe.b2">Trained & compared <strong>8 ML models</strong> with <strong>SMOTE</strong> balancing — selected XGBoost with <strong>88% F1-score</strong> (83% precision, 98% recall).</li>
-              <li data-i18n="exp.pfe.b3">Built a Flask web app with multi-file automated ingestion, interactive risk charts, dynamic KPIs & CSV reporting.</li>
+              <li data-i18n-html="exp.pfe.b1">Designed a complete decision-support system using <strong>CRISP-DM</strong> methodology to identify customers at risk of churn.</li>
+              <li data-i18n-html="exp.pfe.b2">Addressed data quality issues (missing values, duplicates, class imbalance); feature engineering and data visualization.</li>
+              <li data-i18n-html="exp.pfe.b3">Trained and compared four machine learning models (Logistic Regression, Random Forest, SVM, XGBoost); selected XGBoost as final model, achieving 96% accuracy, 83% precision, 93% recall, and 88% F1-score on churn class.</li>
+              <li data-i18n="exp.pfe.b4">Validated final model on real customer data, confirming solid and stable performance.</li>
+              <li data-i18n="exp.pfe.b5">Developed Flask web application with interactive dashboard and dynamic KPIs for prediction visualization.</li>
             </ul>
             <div class="tcard-tags">
               <span>Python</span><span>XGBoost</span><span>SMOTE</span><span>Flask</span><span>CRISP-DM</span>
@@ -283,15 +285,15 @@
           <div class="timeline-dot"></div>
           <div class="timeline-card">
             <div class="tcard-header">
-              <span class="tcard-type work" data-i18n="exp.work">Work</span>
+              <span class="tcard-type work" data-i18n="exp.internship">Internship</span>
               <span class="tcard-date">June 2025</span>
             </div>
-            <h3 class="tcard-title" data-i18n="exp.pfa.title">Software Engineering Intern (PFA)</h3>
-            <span class="tcard-org">Asteelflash Tunisia · Tunis, Tunisia</span>
+            <h3 class="tcard-title" data-i18n="exp.pfa.title">.NET Developer (PFA)</h3>
+            <span class="tcard-org">Asteelflash Tunisia · Soukra, Ariana, Tunisia</span>
             <ul class="tcard-bullets">
-              <li data-i18n="exp.pfa.b1">Developed an ASP.NET MVC web application for industrial quality test management in electronic manufacturing (EMS).</li>
-              <li data-i18n-html="exp.pfa.b2">Implemented an <strong>automated 3-stage workflow</strong> (Initial ➔ QC ➔ Client) with automatic failure rejections & next-test suggestions.</li>
-              <li data-i18n="exp.pfa.b3">Engineered 3 RBAC roles (Admin, User, Operator with 60s confirmation timer), Chart.js analytics & EPPlus Excel exports.</li>
+              <li data-i18n="exp.pfa.b1">Developed a role-based (Administrator, User, Operator) ASP.NET MVC web application for industrial quality test management, implementing a validation workflow (Initial Test → Quality Control → Client Test) with strict business rules.</li>
+              <li data-i18n="exp.pfa.b2">Designed the system architecture with Entity Framework and SQL Server, secure BCrypt authentication, and automatic test-type suggestions based on product history.</li>
+              <li data-i18n="exp.pfa.b3">Built advanced search functionality, Chart.js analytics, and Excel export (EPPlus) for quality reporting.</li>
             </ul>
             <div class="tcard-tags">
               <span>C#</span><span>ASP.NET MVC</span><span>SQL Server</span><span>Chart.js</span><span>EPPlus</span>
@@ -349,7 +351,7 @@
             </div>
           </div>
           <div class="project-badge" data-i18n="proj.badge.pfe">PFE · Internship @ Tunisie Telecom</div>
-          <h3 class="project-title">Système Décisionnel de Prédiction du Churn Client (ML)</h3>
+          <h3 class="project-title" data-i18n="proj.pfe.title">Système Décisionnel de Prédiction du Churn Client (ML)</h3>
           <p class="project-desc" data-i18n-html="proj.pfe.desc">
             End-to-end Machine Learning decision-support platform built for Tunisie Telecom following the <strong>CRISP-DM</strong> methodology. Aggregated & cleaned <strong>6 monthly transactional datasets</strong> (client profile, outgoing/incoming calls, data consumption, recharges, USSD) to construct <strong>46 behavioral features</strong> (trend deltas, active months, recency). Balanced dataset with <strong>SMOTE</strong> and deployed in a interactive <strong>Flask Web Dashboard</strong> with automated multi-file ingestion, dynamic KPI analytics, and CSV reporting.
           </p>
@@ -451,40 +453,50 @@
             </div>
           </div>
           <div class="project-badge" data-i18n="proj.badge.pfa">PFA · Internship @ Asteelflash</div>
-          <h3 class="project-title">Application Web de Gestion des Tests Industriels (EMS)</h3>
+          <h3 class="project-title" data-i18n="proj.pfa.title">Application Web de Gestion des Tests Industriels (EMS)</h3>
           <p class="project-desc" data-i18n-html="proj.pfa.desc">
             Industrial Web Platform developed for Asteelflash (Electronic Manufacturing Services - EMS). Implements an end-to-end <strong>3-level quality control workflow</strong> for electronic boards, complete with strict business rejection rules, real-time hardware assignment, multi-role security (RBAC), live Chart.js analytics, and automated EPPlus Excel report generation.
           </p>
 
-          <!-- Workflow & Rules Box -->
+          <!-- Understanding the 3 Test Levels -->
           <div class="class-dist">
-            <h4 class="dist-title" data-i18n="proj.workflow.title">⚡ 3-Stage Sequential Quality Workflow & Business Rules</h4>
+            <h4 class="dist-title" data-i18n="proj.understanding.title">🔍 Understanding the 3 Test Levels</h4>
             <div class="workflow-steps">
               <div class="wf-step">
                 <span class="wf-num">1</span>
                 <div>
-                  <strong data-i18n="proj.wf.step1.title">Test Initial</strong>
-                  <span data-i18n="proj.wf.step1.desc">Automatic suggestion on new serial #</span>
+                  <strong data-i18n="proj.wf.step1.title">Initial Test</strong>
+                  <span data-i18n="proj.understanding.step1">Initial Test — Checks that the electronic board's identifier (serial number) is correctly structured and valid upon registration in the system.</span>
                 </div>
               </div>
               <div class="wf-arrow">➔</div>
               <div class="wf-step">
                 <span class="wf-num">2</span>
                 <div>
-                  <strong data-i18n="proj.wf.step2.title">Contrôle Qualité</strong>
-                  <span data-i18n="proj.wf.step2.desc">Auto-triggered upon Initial Test pass</span>
+                  <strong data-i18n="proj.wf.step2.title">Quality Control</strong>
+                  <span data-i18n="proj.understanding.step2">Quality Control — Physical inspection of the board to confirm it's in good condition (no visible or hardware defects) before moving forward.</span>
                 </div>
               </div>
               <div class="wf-arrow">➔</div>
               <div class="wf-step">
                 <span class="wf-num">3</span>
                 <div>
-                  <strong data-i18n="proj.wf.step3.title">Test Client (Level 3)</strong>
-                  <span data-i18n="proj.wf.step3.desc">Verifies if electronic board is correctly programmed for client's specific usage → Marks product as "Terminé"</span>
+                  <strong data-i18n="proj.wf.step3.title">Client Test (Level 3)</strong>
+                  <span data-i18n="proj.understanding.step3">Client Test — Verifies that the board is correctly programmed according to the specific requirements and configuration requested by the end client.</span>
                 </div>
               </div>
             </div>
             <p class="wf-rule" data-i18n-html="proj.wf.rule">⛔ <strong>Rejection Rule</strong>: Automatic product rejection upon 2 consecutive failures at any level. Full audit trail recorded.</p>
+          </div>
+
+          <!-- Smart System Features -->
+          <div class="class-dist">
+            <h4 class="dist-title" data-i18n="proj.smart.title">🛡️ Smart System Features</h4>
+            <ul class="tcard-bullets">
+              <li data-i18n="proj.smart.feature1">Automatic next-test suggestion — After each successful test, the system automatically suggests the next test to perform based on the board's history.</li>
+              <li data-i18n="proj.smart.feature2">Error prevention — If the user attempts an incorrect action (wrong order, invalid step), the system blocks it and stops the process immediately.</li>
+              <li data-i18n="proj.smart.feature3">Smart filtering — When running a test, the operator can filter by machine and operator to quickly find the correct board/line to test.</li>
+            </ul>
           </div>
 
           <!-- RBAC & Operations Table -->
@@ -495,9 +507,11 @@
                 <tr><th data-i18n="proj.rbac.role">Role</th><th data-i18n="proj.rbac.responsibilities">Key Responsibilities</th><th data-i18n="proj.rbac.features">Special Features</th></tr>
               </thead>
               <tbody>
-                <tr><td><strong data-i18n="proj.rbac.admin">Administrateur</strong></td><td data-i18n="proj.rbac.admin.resp">User management, global test history, system-wide KPIs</td><td data-i18n="proj.rbac.admin.feat">Chart.js category analytics & Excel export</td></tr>
-                <tr><td><strong data-i18n="proj.rbac.user">Utilisateur</strong></td><td data-i18n="proj.rbac.user.resp">Test registration, product history inspection, advanced search</td><td data-i18n="proj.rbac.user.feat">Multi-criteria filtering (Dates, Boards, Machines)</td></tr>
-                <tr class="best-model"><td><strong data-i18n="proj.rbac.operator">Opérateur / Technicien</strong></td><td data-i18n="proj.rbac.operator.resp">Test execution on assigned machines (e.g. MACH001, BRD-A)</td><td data-i18n="proj.rbac.operator.feat">⏱️ 60-second countdown double confirmation</td></tr>
+                <tr><td><strong data-i18n="proj.rbac.admin">Administrator</strong></td><td data-i18n="proj.rbac.admin.resp">User management, global test history, system-wide KPIs</td><td data-i18n="proj.rbac.admin.feat">Chart.js category analytics & Excel export</td></tr>
+                <tr><td><strong data-i18n="proj.rbac.user">User</strong></td><td data-i18n="proj.rbac.user.resp">Test registration, product history inspection, advanced search</td><td data-i18n="proj.rbac.user.feat">Multi-criteria filtering (Dates, Boards, Machines)</td></tr>
+                <tr><td><strong data-i18n="proj.rbac.technician">Technician</strong></td><td data-i18n="proj.rbac.technician.resp">Executes Initial Test and Quality Control</td><td data-i18n="proj.rbac.technician.feat">60-second countdown double confirmation</td></tr>
+                <tr><td><strong data-i18n="proj.rbac.engineer">Engineer</strong></td><td data-i18n="proj.rbac.engineer.resp">Executes Client Test</td><td data-i18n="proj.rbac.engineer.feat">60-second countdown double confirmation</td></tr>
+                <tr class="best-model"><td><strong data-i18n="proj.rbac.supervisor">Supervisor</strong></td><td data-i18n="proj.rbac.supervisor.resp">Executes all test types</td><td data-i18n="proj.rbac.supervisor.feat">60-second countdown double confirmation</td></tr>
               </tbody>
             </table>
           </div>
@@ -507,7 +521,7 @@
             <h4 class="dist-title" data-i18n="proj.metrics.title">🏭 Operational Performance & Output Metrics</h4>
             <div class="project-metrics">
               <div class="metric"><span class="metric-val">3</span><span class="metric-label" data-i18n="proj.metric.validation">Validation Stages</span></div>
-              <div class="metric"><span class="metric-val">3</span><span class="metric-label" data-i18n="proj.rbac.roles">RBAC Roles</span></div>
+              <div class="metric"><span class="metric-val">5</span><span class="metric-label" data-i18n="proj.rbac.roles">RBAC Roles</span></div>
               <div class="metric"><span class="metric-val">3 min</span><span class="metric-label" data-i18n="proj.metric.avgcycle">Avg Test Cycle</span></div>
               <div class="metric"><span class="metric-val">100%</span><span class="metric-label" data-i18n="proj.metric.traceability">Traceability</span></div>
             </div>
