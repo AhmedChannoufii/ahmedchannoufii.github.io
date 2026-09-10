@@ -597,7 +597,8 @@ ul { list-style: none; }
   margin-top: 8px;
 }
 .cert-card {
-  display: flex;
+  display: flex !important;
+  flex-direction: row !important;
   align-items: center;
   gap: 14px;
   padding: 14px 16px;
@@ -608,6 +609,8 @@ ul { list-style: none; }
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 .cert-card::before {
   content: '';
