@@ -499,3 +499,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+/* ── Certificate Lightbox ── */
+function openCert(filename) {
+  const lb = document.getElementById('cert-lightbox');
+  const img = document.getElementById('cert-lightbox-img');
+  img.src = filename;
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeCert() {
+  const lb = document.getElementById('cert-lightbox');
+  lb.classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeCert();
+});

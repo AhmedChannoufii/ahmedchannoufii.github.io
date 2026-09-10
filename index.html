@@ -126,26 +126,43 @@
             </div>
             <div class="about-certs">
               <h4 data-i18n="about.certs">Certifications</h4>
-              <div class="cert-item">
-                <span class="cert-icon">🏅</span>
-                <div>
-                  <strong>Presenting Data</strong>
-                  <span>HP LIFE · April 2026</span>
+              <div class="cert-cards-grid">
+
+                <div class="cert-card" onclick="openCert('hp life.png')">
+                  <div class="cert-card-icon">🖥️</div>
+                  <div class="cert-card-body">
+                    <strong>Presenting Data</strong>
+                    <span>HP LIFE · April 2026</span>
+                  </div>
+                  <div class="cert-view-btn">View Certificate ↗</div>
                 </div>
+
+                <div class="cert-card" onclick="openCert('sql.jpg')">
+                  <div class="cert-card-icon">🗄️</div>
+                  <div class="cert-card-body">
+                    <strong>SQL</strong>
+                    <span>365 Data Science · Nov 2024</span>
+                  </div>
+                  <div class="cert-view-btn">View Certificate ↗</div>
+                </div>
+
+                <div class="cert-card" onclick="openCert('math.jpg')">
+                  <div class="cert-card-icon">📐</div>
+                  <div class="cert-card-body">
+                    <strong>Mathematics</strong>
+                    <span>365 Data Science · Dec 2024</span>
+                  </div>
+                  <div class="cert-view-btn">View Certificate ↗</div>
+                </div>
+
               </div>
-              <div class="cert-item">
-                <span class="cert-icon">🏅</span>
-                <div>
-                  <strong>SQL</strong>
-                  <span>365 Data Science · Nov. 2024</span>
-                </div>
-              </div>
-              <div class="cert-item">
-                <span class="cert-icon">🏅</span>
-                <div>
-                  <strong>Mathematics</strong>
-                  <span>365 Data Science · Nov. 2024</span>
-                </div>
+            </div>
+
+            <!-- Certificate Lightbox Modal -->
+            <div id="cert-lightbox" class="cert-lightbox" onclick="closeCert()">
+              <div class="cert-lightbox-inner" onclick="event.stopPropagation()">
+                <button class="cert-close-btn" onclick="closeCert()">✕</button>
+                <img id="cert-lightbox-img" src="" alt="Certificate" />
               </div>
             </div>
           </div>
