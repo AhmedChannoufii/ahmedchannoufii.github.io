@@ -591,17 +591,22 @@ ul { list-style: none; }
 
 /* ── Certificate Cards Grid ── */
 .cert-cards-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   margin-top: 8px;
+}
+@media (max-width: 640px) {
+  .cert-cards-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .cert-card {
   display: flex !important;
   flex-direction: row !important;
   align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
+  gap: 12px;
+  padding: 12px 14px;
   background: rgba(0, 245, 212, 0.05);
   border: 1px solid rgba(0, 245, 212, 0.18);
   border-radius: 12px;
