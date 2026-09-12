@@ -95,6 +95,8 @@
         <span class="section-tag" data-i18n="about.tag">Who I am</span>
         <h2 class="section-title" data-i18n-html="about.title">About <span class="gradient-text">Me</span></h2>
       </div>
+
+      <!-- Top Row: Bio Text Left + Photo Right -->
       <div class="about-grid">
         <div class="about-text">
           <p class="about-intro" data-i18n-html="about.intro">
@@ -103,58 +105,6 @@
           <p data-i18n="about.p2">
             I thrive at the intersection of software engineering and data science, turning complex problems into elegant, data-driven solutions. Trilingual in Arabic, French, and English, I bring both technical depth and cross-cultural communication to every project.
           </p>
-          <div class="about-stats">
-            <div class="stat-card">
-              <span class="stat-num">3+</span>
-              <span class="stat-label" data-i18n="about.stat1">Projects Shipped</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-num">3</span>
-              <span class="stat-label" data-i18n="about.stat2">Languages Spoken</span>
-            </div>
-          </div>
-          <div class="about-certs">
-            <h4 data-i18n="about.certs">Certifications</h4>
-            <div class="cert-cards-grid">
-
-              <div class="cert-card" onclick="openCert('cisco_ds.png')">
-                <div class="cert-card-icon">🐍</div>
-                <div class="cert-card-body">
-                  <strong>Data Science Essentials with Python</strong>
-                  <span>Cisco Networking Academy · Sep 2026</span>
-                </div>
-                <div class="cert-view-btn" data-i18n="cert.view">View Certificate ↗</div>
-              </div>
-
-              <div class="cert-card" onclick="openCert('hp life.png')">
-                <div class="cert-card-icon">🖥️</div>
-                <div class="cert-card-body">
-                  <strong>Presenting Data</strong>
-                  <span>HP LIFE · April 2026</span>
-                </div>
-                <div class="cert-view-btn" data-i18n="cert.view">View Certificate ↗</div>
-              </div>
-
-              <div class="cert-card" onclick="openCert('sql.jpg')">
-                <div class="cert-card-icon">🗄️</div>
-                <div class="cert-card-body">
-                  <strong>SQL</strong>
-                  <span>365 Data Science · Nov 2024</span>
-                </div>
-                <div class="cert-view-btn" data-i18n="cert.view">View Certificate ↗</div>
-              </div>
-
-              <div class="cert-card" onclick="openCert('math.jpg')">
-                <div class="cert-card-icon">📐</div>
-                <div class="cert-card-body">
-                  <strong>Mathematics</strong>
-                  <span>365 Data Science · Dec 2024</span>
-                </div>
-                <div class="cert-view-btn" data-i18n="cert.view">View Certificate ↗</div>
-              </div>
-
-            </div>
-          </div>
         </div>
         <div class="about-visual">
           <div class="about-card-glow">
@@ -165,9 +115,67 @@
                 alt="Ahmed Channoufi"
                 class="avatar-photo"
               />
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Middle: Stats Row -->
+      <div class="about-stats" style="margin-top: 30px;">
+        <div class="stat-card">
+          <span class="stat-num">3+</span>
+          <span class="stat-label" data-i18n="about.stat1">Projects Shipped</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">3</span>
+          <span class="stat-label" data-i18n="about.stat2">Languages Spoken</span>
+        </div>
+      </div>
+
+      <!-- Bottom: Certifications 2x2 Grid -->
+      <div class="about-certs" style="margin-top: 30px;">
+        <h4 data-i18n="about.certs">Certifications</h4>
+        <div class="cert-cards-grid">
+
+          <div class="cert-card" onclick="openCert('cisco_ds.png')">
+            <div class="cert-card-icon">🐍</div>
+            <div class="cert-card-body">
+              <strong>Data Science Essentials with Python</strong>
+              <span>Cisco Networking Academy · Sep 2026</span>
+            </div>
+            <div class="cert-view-btn" data-i18n="cert.view">View Certificate ↗</div>
+          </div>
+
+          <div class="cert-card" onclick="openCert('hp life.png')">
+            <div class="cert-card-icon">🖥️</div>
+            <div class="cert-card-body">
+              <strong>Presenting Data</strong>
+              <span>HP LIFE · April 2026</span>
+            </div>
+            <div class="cert-view-btn" data-i18n="cert.view">View Certificate ↗</div>
+          </div>
+
+          <div class="cert-card" onclick="openCert('sql.jpg')">
+            <div class="cert-card-icon">🗄️</div>
+            <div class="cert-card-body">
+              <strong>SQL</strong>
+              <span>365 Data Science · Nov 2024</span>
+            </div>
+            <div class="cert-view-btn" data-i18n="cert.view">View Certificate ↗</div>
+          </div>
+
+          <div class="cert-card" onclick="openCert('math.jpg')">
+            <div class="cert-card-icon">📐</div>
+            <div class="cert-card-body">
+              <strong>Mathematics</strong>
+              <span>365 Data Science · Dec 2024</span>
+            </div>
+            <div class="cert-view-btn" data-i18n="cert.view">View Certificate ↗</div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
