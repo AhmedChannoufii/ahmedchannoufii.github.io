@@ -31,9 +31,9 @@
       position: relative;
       max-width: 900px;
       margin: 0 auto;
-      padding: 20px 0;
+      padding: 10px 0 20px;
     }
-    .timeline::before {
+    .timeline.work-timeline::before {
       content: '';
       position: absolute;
       top: 0;
@@ -41,7 +41,18 @@
       left: 50%;
       transform: translateX(-50%);
       width: 2px;
-      background: linear-gradient(to bottom, transparent, rgba(0, 245, 212, 0.3), #00f5d4, #7b2ff7, transparent);
+      background: linear-gradient(to bottom, transparent, rgba(0, 245, 212, 0.4), #00f5d4, transparent);
+      border-radius: 2px;
+    }
+    .timeline.edu-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, rgba(123, 47, 247, 0.4), #7b2ff7, transparent);
       border-radius: 2px;
     }
     .timeline-item {
@@ -49,7 +60,7 @@
       justify-content: flex-end;
       width: 50%;
       padding-right: 42px;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       position: relative;
     }
     .timeline-item[data-side="right"] {
@@ -179,7 +190,8 @@
     }
 
     @media (max-width: 768px) {
-      .timeline::before {
+      .timeline.work-timeline::before,
+      .timeline.edu-timeline::before {
         left: 20px;
       }
       .timeline-item {
@@ -198,7 +210,6 @@
         right: auto;
       }
     }
-
   </style>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -620,16 +631,19 @@
     </section>
 
     <!-- 4. EXPERIENCE & EDUCATION SECTION -->
+    <!-- 4. EXPERIENCE & EDUCATION SECTIONS (TWO SEPARATE BLOCKS) -->
     <section id="experience" class="py-24 max-w-6xl mx-auto px-6 w-full">
-      <div class="flex flex-col items-center text-center mb-16">
-        <span class="text-xs font-mono text-primary tracking-widest uppercase mb-1" data-i18n="exp.tag">JOURNEY</span>
+      
+      <!-- ==================== BLOC 1 : EXPÉRIENCE PROFESSIONNELLE ==================== -->
+      <div class="flex flex-col items-center text-center mb-14">
+        <span class="text-xs font-mono text-primary tracking-widest uppercase mb-1" data-i18n="exp.tag">EXPERIENCE</span>
         <h2 class="text-3xl sm:text-4xl font-bold text-on-surface relative">
-          <span data-i18n-html="exp.title">Experience & <span class="bg-gradient-to-r from-primary via-[#7b2ff7] to-[#f72f8b] bg-clip-text text-transparent">Education</span></span>
-          <span class="block h-1 w-16 mx-auto bg-gradient-to-r from-primary to-[#7b2ff7] rounded-full mt-2"></span>
+          <span data-i18n-html="exp.title">Work <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Experience</span></span>
+          <span class="block h-1 w-16 mx-auto bg-gradient-to-r from-primary to-secondary rounded-full mt-2"></span>
         </h2>
       </div>
 
-      <div class="timeline">
+      <div class="timeline work-timeline">
 
         <!-- Item 1: Tunisie Telecom (Left) -->
         <div class="timeline-item" data-side="left">
@@ -675,44 +689,60 @@
           </div>
         </div>
 
-        <!-- Item 3: Master in Data Science (Left) -->
+      </div>
+
+      <!-- ==================== SÉPARATEUR DE SECTION ==================== -->
+      <div class="h-px max-w-xl mx-auto my-16 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+      <!-- ==================== BLOC 2 : FORMATION & ÉDUCATION ==================== -->
+      <div id="education" class="flex flex-col items-center text-center mb-14 pt-4">
+        <span class="text-xs font-mono text-tertiary tracking-widest uppercase mb-1" data-i18n="edu.tag">EDUCATION</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-on-surface relative">
+          <span data-i18n-html="edu.title">Education & <span class="bg-gradient-to-r from-tertiary to-[#f72f8b] bg-clip-text text-transparent">Degrees</span></span>
+          <span class="block h-1 w-16 mx-auto bg-gradient-to-r from-tertiary to-[#f72f8b] rounded-full mt-2"></span>
+        </h2>
+      </div>
+
+      <div class="timeline edu-timeline">
+
+        <!-- Item 1: Master Professionnel en Informatique : Data Science (Left) -->
         <div class="timeline-item" data-side="left">
           <div class="timeline-dot edu-dot"></div>
           <div class="timeline-card edu-card">
             <div class="tcard-header">
-              <span class="tcard-type edu" data-i18n="exp.edu">Education</span>
-              <span class="tcard-date" data-i18n="exp.master.date">2026 – Present</span>
+              <span class="tcard-type edu" data-i18n="edu.type">Education</span>
+              <span class="tcard-date" data-i18n="edu.master.date">2026 – Present</span>
             </div>
-            <h3 class="tcard-title" data-i18n="exp.master.title">Master's Degree in Data Science</h3>
-            <span class="tcard-org" data-i18n="exp.islaib.org">ISLAIB (Higher Institute of Applied Languages and Computer Science of Béja)</span>
-            <p class="tcard-note" data-i18n="exp.current">Current · Year 2026</p>
+            <h3 class="tcard-title" data-i18n="edu.master.title">Professional Master's Degree in Computer Science: Data Science</h3>
+            <span class="tcard-org" data-i18n="edu.islaib.org">ISLAIB (Higher Institute of Applied Languages and Computer Science of Béja)</span>
+            <p class="tcard-note" data-i18n="edu.current">Current · Year 2026</p>
           </div>
         </div>
 
-        <!-- Item 4: Bachelor's Degree (Right) -->
+        <!-- Item 2: Bachelor's Degree (Right) -->
         <div class="timeline-item" data-side="right">
           <div class="timeline-dot edu-dot"></div>
           <div class="timeline-card edu-card">
             <div class="tcard-header">
-              <span class="tcard-type edu" data-i18n="exp.edu">Education</span>
-              <span class="tcard-date" data-i18n="exp.bachelor.date">2023 – 2026</span>
+              <span class="tcard-type edu" data-i18n="edu.type">Education</span>
+              <span class="tcard-date" data-i18n="edu.bachelor.date">2023 – 2026</span>
             </div>
-            <h3 class="tcard-title" data-i18n="exp.bachelor.title">Bachelor's Degree in Computer Science (Software Engineering & Information Systems)</h3>
-            <span class="tcard-org" data-i18n="exp.islaib.org">ISLAIB (Higher Institute of Applied Languages and Computer Science of Béja)</span>
-            <p class="tcard-note" data-i18n="exp.honors">Graduated with Honors 🎓</p>
+            <h3 class="tcard-title" data-i18n="edu.bachelor.title">Bachelor's Degree in Computer Science (Software Engineering & Information Systems)</h3>
+            <span class="tcard-org" data-i18n="edu.islaib.org">ISLAIB (Higher Institute of Applied Languages and Computer Science of Béja)</span>
+            <p class="tcard-note" data-i18n="edu.honors">Graduated with Honors 🎓</p>
           </div>
         </div>
 
-        <!-- Item 5: Baccalaureate (Left) -->
+        <!-- Item 3: Baccalaureate (Left) -->
         <div class="timeline-item" data-side="left">
           <div class="timeline-dot edu-dot"></div>
           <div class="timeline-card edu-card">
             <div class="tcard-header">
-              <span class="tcard-type edu" data-i18n="exp.edu">Education</span>
-              <span class="tcard-date" data-i18n="exp.bac.date">2022 – 2023</span>
+              <span class="tcard-type edu" data-i18n="edu.type">Education</span>
+              <span class="tcard-date" data-i18n="edu.bac.date">2022 – 2023</span>
             </div>
-            <h3 class="tcard-title" data-i18n="exp.bac.title">Baccalaureate in Computer Science</h3>
-            <span class="tcard-org" data-i18n="exp.bac.org">Lycée Omrane Supérieur · Tunis</span>
+            <h3 class="tcard-title" data-i18n="edu.bac.title">Baccalaureate in Computer Science</h3>
+            <span class="tcard-org" data-i18n="edu.bac.org">Lycée Omrane Supérieur · Tunis</span>
           </div>
         </div>
 
@@ -1390,14 +1420,9 @@
         "skills.arabic": "Arabic", "skills.native": "(Native)",
         "skills.french": "French", "skills.intermediate": "(Intermediate)",
         "skills.english": "English", "skills.good": "(Good Level)",
-        "exp.tag": "JOURNEY",
-        "exp.title": 'Experience & <span class="bg-gradient-to-r from-primary via-[#7b2ff7] to-[#f72f8b] bg-clip-text text-transparent">Education</span>',
+        "exp.tag": "EXPERIENCE",
+        "exp.title": 'Work <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Experience</span>',
         "exp.internship": "Internship",
-        "exp.edu": "Education",
-        "exp.current": "Current · Year 2026",
-        "exp.master.date": "2026 – Present",
-        "exp.master.title": "Master's Degree in Data Science",
-        "exp.islaib.org": "ISLAIB (Higher Institute of Applied Languages and Computer Science of Béja)",
         "exp.pfe.date": "Feb 2026 – Jun 2026",
         "exp.pfe.title": "Final-Year Project Internship (PFE) — Customer Churn Prediction",
         "exp.pfe.org": "Tunisie Telecom · Tunis, Tunisia",
@@ -1412,12 +1437,19 @@
         "exp.pfa.b1": "Developed a role-based (Administrator, User, Operator) ASP.NET MVC web application for industrial quality test management, implementing a validation workflow (Initial Test → Quality Control → Client Test) with strict business rules.",
         "exp.pfa.b2": "Designed the system architecture with Entity Framework and SQL Server, and automatic test-type suggestions based on product history.",
         "exp.pfa.b3": "Built advanced search functionality, Chart.js analytics, and automated Excel quality reporting.",
-        "exp.bachelor.date": "2023 – 2026",
-        "exp.bachelor.title": "Bachelor's Degree in Computer Science (Software Engineering & Information Systems)",
-        "exp.honors": "Graduated with Honors 🎓",
-        "exp.bac.date": "2022 – 2023",
-        "exp.bac.title": "Baccalaureate in Computer Science",
-        "exp.bac.org": "Lycée Omrane Supérieur · Tunis",
+        "edu.tag": "EDUCATION",
+        "edu.title": 'Education & <span class="bg-gradient-to-r from-tertiary to-[#f72f8b] bg-clip-text text-transparent">Degrees</span>',
+        "edu.type": "Education",
+        "edu.current": "Current · Year 2026",
+        "edu.master.date": "2026 – Present",
+        "edu.master.title": "Professional Master's Degree in Computer Science: Data Science",
+        "edu.islaib.org": "ISLAIB (Higher Institute of Applied Languages and Computer Science of Béja)",
+        "edu.bachelor.date": "2023 – 2026",
+        "edu.bachelor.title": "Bachelor's Degree in Computer Science (Software Engineering & Information Systems)",
+        "edu.honors": "Graduated with Honors 🎓",
+        "edu.bac.date": "2022 – 2023",
+        "edu.bac.title": "Baccalaureate in Computer Science",
+        "edu.bac.org": "Lycée Omrane Supérieur · Tunis",
         "proj.tag": "PORTFOLIO",
         "proj.title": 'Featured <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Projects</span>',
         "proj.badge.pfe": "PFE · Internship @ Tunisie Telecom",
@@ -1506,14 +1538,9 @@
         "skills.arabic": "Arabe", "skills.native": "(Langue maternelle)",
         "skills.french": "Français", "skills.intermediate": "(Intermédiaire)",
         "skills.english": "Anglais", "skills.good": "(Bon niveau)",
-        "exp.tag": "PARCOURS",
-        "exp.title": 'Expérience & <span class="bg-gradient-to-r from-primary via-[#7b2ff7] to-[#f72f8b] bg-clip-text text-transparent">Formation</span>',
+        "exp.tag": "EXPÉRIENCE",
+        "exp.title": 'Expérience <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Professionnelle</span>',
         "exp.internship": "Stage",
-        "exp.edu": "Formation",
-        "exp.current": "En cours · Année 2026",
-        "exp.master.date": "2026 – Présent",
-        "exp.master.title": "Master en Science des Données",
-        "exp.islaib.org": "ISLAIB (Institut Supérieur des Langues Appliquées et de l'Informatique de Béja)",
         "exp.pfe.date": "Fév 2026 – Juin 2026",
         "exp.pfe.title": "Stage PFE — Prédiction du Churn Client",
         "exp.pfe.org": "Tunisie Telecom · Tunis, Tunisie",
@@ -1528,12 +1555,19 @@
         "exp.pfa.b1": "Développement d'une application web ASP.NET MVC basée sur les rôles (Administrateur, Utilisateur, Opérateur) pour la gestion des tests qualité industriels (Initial → QC → Client) avec règles métiers strictes.",
         "exp.pfa.b2": "Architecture avec Entity Framework, SQL Server et suggestions automatiques de tests selon l'historique produit.",
         "exp.pfa.b3": "Fonctionnalités de recherche avancée, analytique Chart.js et génération de rapports Excel automatisée.",
-        "exp.bachelor.date": "2023 – 2026",
-        "exp.bachelor.title": "Licence en Informatique (Génie Logiciel & Systèmes d'Information)",
-        "exp.honors": "Diplômé avec Mention Bien 🎓",
-        "exp.bac.date": "2022 – 2023",
-        "exp.bac.title": "Baccalauréat en Sciences de l'Informatique",
-        "exp.bac.org": "Lycée Omrane Supérieur · Tunis",
+        "edu.tag": "FORMATION",
+        "edu.title": 'Formation & <span class="bg-gradient-to-r from-tertiary to-[#f72f8b] bg-clip-text text-transparent">Diplômes</span>',
+        "edu.type": "Formation",
+        "edu.current": "En cours · Année 2026",
+        "edu.master.date": "2026 – Présent",
+        "edu.master.title": "Master Professionnel en Informatique : Data Science",
+        "edu.islaib.org": "ISLAIB (Institut Supérieur des Langues Appliquées et de l'Informatique de Béja)",
+        "edu.bachelor.date": "2023 – 2026",
+        "edu.bachelor.title": "Licence en Informatique (Génie Logiciel & Systèmes d'Information)",
+        "edu.honors": "Diplômé avec Mention Bien 🎓",
+        "edu.bac.date": "2022 – 2023",
+        "edu.bac.title": "Baccalauréat en Sciences de l'Informatique",
+        "edu.bac.org": "Lycée Omrane Supérieur · Tunis",
         "proj.tag": "PORTFOLIO",
         "proj.title": 'Projets <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Phares</span>',
         "proj.badge.pfe": "PFE · Stage @ Tunisie Telecom",
