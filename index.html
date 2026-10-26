@@ -25,6 +25,180 @@
       vertical-align: middle;
       line-height: 1;
     }
+
+    /* TIMELINE STYLES */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, rgba(0, 245, 212, 0.3), #00f5d4, #7b2ff7, transparent);
+      border-radius: 2px;
+    }
+    .timeline-item {
+      display: flex;
+      justify-content: flex-end;
+      width: 50%;
+      padding-right: 42px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .timeline-item[data-side="right"] {
+      justify-content: flex-start;
+      padding-right: 0;
+      padding-left: 42px;
+      margin-left: 50%;
+    }
+    .timeline-dot {
+      position: absolute;
+      right: -10px;
+      top: 24px;
+      width: 20px;
+      height: 20px;
+      background: #0f131c;
+      border: 3px solid #00f5d4;
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(0, 245, 212, 0.6);
+      z-index: 2;
+    }
+    .timeline-item[data-side="right"] .timeline-dot {
+      right: auto;
+      left: -10px;
+    }
+    .edu-dot {
+      border-color: #7b2ff7;
+      box-shadow: 0 0 16px rgba(123, 47, 247, 0.6);
+    }
+    .timeline-card {
+      background: rgba(24, 27, 37, 0.85);
+      border: 1px solid rgba(0, 245, 212, 0.15);
+      border-radius: 18px;
+      padding: 24px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .timeline-card:hover {
+      border-color: rgba(0, 245, 212, 0.4);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 245, 212, 0.2);
+      transform: translateY(-3px);
+    }
+    .edu-card {
+      border-color: rgba(123, 47, 247, 0.2);
+    }
+    .edu-card:hover {
+      border-color: rgba(123, 47, 247, 0.45);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(123, 47, 247, 0.2);
+    }
+    .tcard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tcard-type {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 3px 12px;
+      border-radius: 50px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .tcard-type.work {
+      background: rgba(0, 245, 212, 0.12);
+      color: #00f5d4;
+      border: 1px solid rgba(0, 245, 212, 0.25);
+    }
+    .tcard-type.edu {
+      background: rgba(123, 47, 247, 0.12);
+      color: #c4a0ff;
+      border: 1px solid rgba(123, 47, 247, 0.25);
+    }
+    .tcard-date {
+      font-size: 0.8rem;
+      color: #bbcabf;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .tcard-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #dfe2ef;
+      margin-bottom: 4px;
+    }
+    .tcard-org {
+      font-size: 0.85rem;
+      color: #8899bb;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .tcard-bullets {
+      padding-left: 18px;
+      margin-bottom: 14px;
+    }
+    .tcard-bullets li {
+      color: #bbcabf;
+      font-size: 0.86rem;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .tcard-bullets li strong {
+      color: #00f5d4;
+    }
+    .tcard-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .tcard-tags span {
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bbcabf;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .tcard-note {
+      font-size: 0.88rem;
+      color: #c4a0ff;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 20px;
+      }
+      .timeline-item {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 0;
+        justify-content: flex-start;
+      }
+      .timeline-item[data-side="right"] {
+        margin-left: 0;
+        padding-left: 50px;
+      }
+      .timeline-dot,
+      .timeline-item[data-side="right"] .timeline-dot {
+        left: 10px;
+        right: auto;
+      }
+    }
+
   </style>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -447,105 +621,98 @@
 
     <!-- 4. EXPERIENCE & EDUCATION SECTION -->
     <section id="experience" class="py-24 max-w-6xl mx-auto px-6 w-full">
-      <div class="flex flex-col items-start mb-10">
-        <span class="text-xs font-mono text-tertiary tracking-widest uppercase mb-1" data-i18n="exp.tag">JOURNEY</span>
+      <div class="flex flex-col items-center text-center mb-16">
+        <span class="text-xs font-mono text-primary tracking-widest uppercase mb-1" data-i18n="exp.tag">JOURNEY</span>
         <h2 class="text-3xl sm:text-4xl font-bold text-on-surface relative">
-          <span data-i18n-html="exp.title">Work & <span class="bg-gradient-to-r from-tertiary to-primary bg-clip-text text-transparent">Education</span></span>
-          <span class="block h-1 w-12 bg-gradient-to-r from-tertiary to-primary rounded-full mt-2"></span>
+          <span data-i18n-html="exp.title">Experience & <span class="bg-gradient-to-r from-primary via-[#7b2ff7] to-[#f72f8b] bg-clip-text text-transparent">Education</span></span>
+          <span class="block h-1 w-16 mx-auto bg-gradient-to-r from-primary to-[#7b2ff7] rounded-full mt-2"></span>
         </h2>
       </div>
 
-      <!-- Interactive Tab Switcher -->
-      <div class="inline-flex p-1 rounded-xl bg-surface-container-low border border-white/5 mb-10 shadow-inner">
-        <button id="btn-tab-work" type="button" class="px-6 py-2.5 rounded-lg text-sm font-semibold transition-all bg-surface-container-high text-on-surface shadow-sm">
-          <span data-i18n="exp.work">Work Experience</span>
-        </button>
-        <button id="btn-tab-edu" type="button" class="px-6 py-2.5 rounded-lg text-sm font-semibold transition-all text-on-surface-variant hover:text-on-surface">
-          <span data-i18n="exp.edu">Education</span>
-        </button>
-      </div>
+      <div class="timeline">
 
-      <!-- Tab 1: Work Experience Timeline -->
-      <div id="tab-work-content" class="flex flex-col gap-8 transition-opacity duration-300">
-        
-        <!-- Item 1: Tunisie Telecom -->
-        <div class="relative pl-8 before:absolute before:left-2.5 before:top-3 before:bottom-0 before:w-0.5 before:bg-surface-variant">
-          <div class="absolute left-0 top-2 w-5 h-5 rounded-full bg-surface-container-highest border-4 border-primary"></div>
-          <div class="p-6 rounded-2xl bg-surface-container-low/80 border border-white/5 backdrop-blur-md shadow-lg">
-            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-              <h3 class="text-lg font-bold text-on-surface">Tunisie Telecom</h3>
-              <span class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary font-mono font-semibold" data-i18n="exp.pfe.date">Feb 2026 – Jun 2026</span>
+        <!-- Item 1: Tunisie Telecom (Left) -->
+        <div class="timeline-item" data-side="left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="tcard-header">
+              <span class="tcard-type work" data-i18n="exp.internship">Internship</span>
+              <span class="tcard-date" data-i18n="exp.pfe.date">Feb 2026 – Jun 2026</span>
             </div>
-            <p class="text-sm text-secondary font-semibold mb-4" data-i18n="exp.pfe.title">Final-Year Project Internship (PFE) — Customer Churn Prediction</p>
-            <ul class="space-y-2 text-on-surface-variant text-sm list-disc list-inside">
+            <h3 class="tcard-title" data-i18n="exp.pfe.title">Final-Year Project Internship (PFE) — Customer Churn Prediction</h3>
+            <span class="tcard-org" data-i18n="exp.pfe.org">Tunisie Telecom · Tunis, Tunisia</span>
+            <ul class="tcard-bullets">
               <li data-i18n-html="exp.pfe.b1">Designed a complete decision-support system following the <strong>CRISP-DM</strong> methodology to identify customers at risk of churn.</li>
-              <li data-i18n="exp.pfe.b2">Handled data quality issues (missing values, duplicates, class imbalance); performed feature engineering (46 variables) and visualization.</li>
-              <li data-i18n-html="exp.pfe.b3">Trained and evaluated multiple machine learning models; selected XGBoost achieving <strong class="text-on-surface font-semibold">96% accuracy, 83% precision, 93% recall, and 88% F1-score</strong> on the churn class.</li>
-              <li data-i18n="exp.pfe.b4">Validated the final model on real customer data (34,000 clients), confirming solid and stable performance.</li>
-              <li data-i18n="exp.pfe.b5">Built a Flask web application with an interactive dashboard and dynamic KPIs for prediction visualization.</li>
+              <li data-i18n-html="exp.pfe.b2">Handled data quality issues (missing values, duplicates, class imbalance); performed feature engineering (46 variables) and visualization.</li>
+              <li data-i18n-html="exp.pfe.b3">Trained and evaluated multiple machine learning models; selected XGBoost achieving <strong class="text-primary font-semibold">96% accuracy, 83% precision, 93% recall, and 88% F1-score</strong> on the churn class.</li>
+              <li data-i18n-html="exp.pfe.b4">Validated the final model on real customer data (34,000 clients), confirming solid and stable performance.</li>
+              <li data-i18n-html="exp.pfe.b5">Built a Flask web application with an interactive dashboard and dynamic KPIs for prediction visualization.</li>
             </ul>
+            <div class="tcard-tags">
+              <span>Python</span><span>XGBoost</span><span>Flask</span><span>CRISP-DM</span>
+            </div>
           </div>
         </div>
 
-        <!-- Item 2: Asteelflash Tunisia -->
-        <div class="relative pl-8">
-          <div class="absolute left-0 top-2 w-5 h-5 rounded-full bg-surface-container-highest border-4 border-secondary"></div>
-          <div class="p-6 rounded-2xl bg-surface-container-low/80 border border-white/5 backdrop-blur-md shadow-lg">
-            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-              <h3 class="text-lg font-bold text-on-surface">Asteelflash Tunisia</h3>
-              <span class="text-xs px-3 py-1 rounded-full bg-secondary/10 text-secondary font-mono font-semibold" data-i18n="exp.pfa.date">Jun 2025</span>
+        <!-- Item 2: Asteelflash Tunisia (Right) -->
+        <div class="timeline-item" data-side="right">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="tcard-header">
+              <span class="tcard-type work" data-i18n="exp.internship">Internship</span>
+              <span class="tcard-date" data-i18n="exp.pfa.date">Jun 2025</span>
             </div>
-            <p class="text-sm text-secondary font-semibold mb-4" data-i18n="exp.pfa.title">Internship (PFA) — Full-Stack .NET Developer</p>
-            <ul class="space-y-2 text-on-surface-variant text-sm list-disc list-inside">
+            <h3 class="tcard-title" data-i18n="exp.pfa.title">Internship (PFA) — Full-Stack .NET Developer</h3>
+            <span class="tcard-org" data-i18n="exp.pfa.org">Asteelflash Tunisia · Soukra, Ariana, Tunisia</span>
+            <ul class="tcard-bullets">
               <li data-i18n="exp.pfa.b1">Developed a role-based (Administrator, User, Operator) ASP.NET MVC web application for industrial quality test management, implementing a validation workflow (Initial Test → Quality Control → Client Test) with strict business rules.</li>
-              <li data-i18n="exp.pfa.b2">Designed the system architecture with Entity Framework and SQL Server, secure BCrypt authentication, and automatic test-type suggestions based on product history.</li>
-              <li data-i18n="exp.pfa.b3">Built advanced search functionality, Chart.js analytics, and Excel export (EPPlus) for quality reporting.</li>
+              <li data-i18n="exp.pfa.b2">Designed the system architecture with Entity Framework and SQL Server, and automatic test-type suggestions based on product history.</li>
+              <li data-i18n="exp.pfa.b3">Built advanced search functionality, Chart.js analytics, and automated Excel quality reporting.</li>
             </ul>
+            <div class="tcard-tags">
+              <span>C#</span><span>ASP.NET MVC</span><span>SQL Server</span><span>Chart.js</span>
+            </div>
           </div>
         </div>
 
-      </div>
-
-      <!-- Tab 2: Education Timeline (Long sentences deleted, Master specialty cleanly set to Data Science) -->
-      <div id="tab-edu-content" class="hidden flex flex-col gap-8 transition-opacity duration-300">
-        
-        <!-- Edu 1: Master's in Data Science @ ISLAIB (Started 2026) -->
-        <div class="relative pl-8 before:absolute before:left-2.5 before:top-3 before:bottom-0 before:w-0.5 before:bg-surface-variant">
-          <div class="absolute left-0 top-2 w-5 h-5 rounded-full bg-surface-container-highest border-4 border-primary"></div>
-          <div class="p-6 rounded-2xl bg-surface-container-low/80 border border-primary/30 backdrop-blur-md shadow-lg">
-            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-              <div class="flex items-center gap-2">
-                <h3 class="text-lg font-bold text-on-surface">ISLAIB (Institut Supérieur des Langues Appliquées et de l'Informatique de Béja)</h3>
-                <span class="px-2 py-0.5 text-xs font-semibold rounded bg-primary/20 text-primary" data-i18n="exp.current">Current · 2026</span>
-              </div>
-              <span class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary font-mono font-bold" data-i18n="exp.master.date">2026 – Present</span>
+        <!-- Item 3: Master in Data Science (Left) -->
+        <div class="timeline-item" data-side="left">
+          <div class="timeline-dot edu-dot"></div>
+          <div class="timeline-card edu-card">
+            <div class="tcard-header">
+              <span class="tcard-type edu" data-i18n="exp.edu">Education</span>
+              <span class="tcard-date" data-i18n="exp.master.date">2026 – Present</span>
             </div>
-            <p class="text-base text-primary font-bold" data-i18n="exp.master.title">Master's Degree in Data Science</p>
+            <h3 class="tcard-title" data-i18n="exp.master.title">Master's Degree in Data Science</h3>
+            <span class="tcard-org" data-i18n="exp.islaib.org">ISLAIB (Higher Institute of Applied Languages and Computer Science of Béja)</span>
+            <p class="tcard-note" data-i18n="exp.current">Current · Year 2026</p>
           </div>
         </div>
 
-        <!-- Edu 2: Bachelor's Degree @ ISLAIB (2023 - 2026) -->
-        <div class="relative pl-8 before:absolute before:left-2.5 before:top-3 before:bottom-0 before:w-0.5 before:bg-surface-variant">
-          <div class="absolute left-0 top-2 w-5 h-5 rounded-full bg-surface-container-highest border-4 border-secondary"></div>
-          <div class="p-6 rounded-2xl bg-surface-container-low/80 border border-white/5 backdrop-blur-md shadow-lg">
-            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-              <h3 class="text-lg font-bold text-on-surface">ISLAIB (Higher Institute of Applied Languages and Computer Science of Béja)</h3>
-              <span class="text-xs px-3 py-1 rounded-full bg-secondary/10 text-secondary font-mono font-semibold">2023 – 2026</span>
+        <!-- Item 4: Bachelor's Degree (Right) -->
+        <div class="timeline-item" data-side="right">
+          <div class="timeline-dot edu-dot"></div>
+          <div class="timeline-card edu-card">
+            <div class="tcard-header">
+              <span class="tcard-type edu" data-i18n="exp.edu">Education</span>
+              <span class="tcard-date" data-i18n="exp.bachelor.date">2023 – 2026</span>
             </div>
-            <p class="text-base text-secondary font-semibold" data-i18n="exp.bachelor.title">Bachelor's Degree in Computer Science (Software Engineering & Information Systems)</p>
-            <p class="text-sm text-on-surface-variant font-mono mt-1" data-i18n="exp.honors">Graduated with Honors 🎓</p>
+            <h3 class="tcard-title" data-i18n="exp.bachelor.title">Bachelor's Degree in Computer Science (Software Engineering & Information Systems)</h3>
+            <span class="tcard-org" data-i18n="exp.islaib.org">ISLAIB (Higher Institute of Applied Languages and Computer Science of Béja)</span>
+            <p class="tcard-note" data-i18n="exp.honors">Graduated with Honors 🎓</p>
           </div>
         </div>
 
-        <!-- Edu 3: Baccalaureate (2022 - 2023) -->
-        <div class="relative pl-8">
-          <div class="absolute left-0 top-2 w-5 h-5 rounded-full bg-surface-container-highest border-4 border-tertiary"></div>
-          <div class="p-6 rounded-2xl bg-surface-container-low/80 border border-white/5 backdrop-blur-md shadow-lg">
-            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-              <h3 class="text-lg font-bold text-on-surface">Lycée Omrane Supérieur · Tunis</h3>
-              <span class="text-xs px-3 py-1 rounded-full bg-tertiary/10 text-tertiary font-mono font-semibold">2022 – 2023</span>
+        <!-- Item 5: Baccalaureate (Left) -->
+        <div class="timeline-item" data-side="left">
+          <div class="timeline-dot edu-dot"></div>
+          <div class="timeline-card edu-card">
+            <div class="tcard-header">
+              <span class="tcard-type edu" data-i18n="exp.edu">Education</span>
+              <span class="tcard-date" data-i18n="exp.bac.date">2022 – 2023</span>
             </div>
-            <p class="text-base text-tertiary font-semibold" data-i18n="exp.bac.title">Baccalaureate in Computer Science</p>
+            <h3 class="tcard-title" data-i18n="exp.bac.title">Baccalaureate in Computer Science</h3>
+            <span class="tcard-org" data-i18n="exp.bac.org">Lycée Omrane Supérieur · Tunis</span>
           </div>
         </div>
 
@@ -1224,26 +1391,33 @@
         "skills.french": "French", "skills.intermediate": "(Intermediate)",
         "skills.english": "English", "skills.good": "(Good Level)",
         "exp.tag": "JOURNEY",
-        "exp.title": 'Work & <span class="bg-gradient-to-r from-tertiary to-primary bg-clip-text text-transparent">Education</span>',
-        "exp.work": "Work Experience", "exp.edu": "Education",
-        "exp.current": "Current · 2026",
+        "exp.title": 'Experience & <span class="bg-gradient-to-r from-primary via-[#7b2ff7] to-[#f72f8b] bg-clip-text text-transparent">Education</span>',
+        "exp.internship": "Internship",
+        "exp.edu": "Education",
+        "exp.current": "Current · Year 2026",
         "exp.master.date": "2026 – Present",
         "exp.master.title": "Master's Degree in Data Science",
+        "exp.islaib.org": "ISLAIB (Higher Institute of Applied Languages and Computer Science of Béja)",
         "exp.pfe.date": "Feb 2026 – Jun 2026",
         "exp.pfe.title": "Final-Year Project Internship (PFE) — Customer Churn Prediction",
+        "exp.pfe.org": "Tunisie Telecom · Tunis, Tunisia",
         "exp.pfe.b1": "Designed a complete decision-support system following the <strong>CRISP-DM</strong> methodology to identify customers at risk of churn.",
         "exp.pfe.b2": "Handled data quality issues (missing values, duplicates, class imbalance); performed feature engineering (46 variables) and visualization.",
-        "exp.pfe.b3": "Trained and evaluated multiple machine learning models; selected XGBoost achieving 96% accuracy, 83% precision, 93% recall, and 88% F1-score on the churn class.",
+        "exp.pfe.b3": "Trained and evaluated multiple machine learning models; selected XGBoost achieving <strong class=\"text-primary font-semibold\">96% accuracy, 83% precision, 93% recall, and 88% F1-score</strong> on the churn class.",
         "exp.pfe.b4": "Validated the final model on real customer data (34,000 clients), confirming solid and stable performance.",
         "exp.pfe.b5": "Built a Flask web application with an interactive dashboard and dynamic KPIs for prediction visualization.",
         "exp.pfa.date": "Jun 2025",
         "exp.pfa.title": "Internship (PFA) — Full-Stack .NET Developer",
+        "exp.pfa.org": "Asteelflash Tunisia · Soukra, Ariana, Tunisia",
         "exp.pfa.b1": "Developed a role-based (Administrator, User, Operator) ASP.NET MVC web application for industrial quality test management, implementing a validation workflow (Initial Test → Quality Control → Client Test) with strict business rules.",
-        "exp.pfa.b2": "Designed the system architecture with Entity Framework and SQL Server, secure BCrypt authentication, and automatic test-type suggestions based on product history.",
-        "exp.pfa.b3": "Built advanced search functionality, Chart.js analytics, and Excel export (EPPlus) for quality reporting.",
+        "exp.pfa.b2": "Designed the system architecture with Entity Framework and SQL Server, and automatic test-type suggestions based on product history.",
+        "exp.pfa.b3": "Built advanced search functionality, Chart.js analytics, and automated Excel quality reporting.",
+        "exp.bachelor.date": "2023 – 2026",
         "exp.bachelor.title": "Bachelor's Degree in Computer Science (Software Engineering & Information Systems)",
         "exp.honors": "Graduated with Honors 🎓",
+        "exp.bac.date": "2022 – 2023",
         "exp.bac.title": "Baccalaureate in Computer Science",
+        "exp.bac.org": "Lycée Omrane Supérieur · Tunis",
         "proj.tag": "PORTFOLIO",
         "proj.title": 'Featured <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Projects</span>',
         "proj.badge.pfe": "PFE · Internship @ Tunisie Telecom",
@@ -1333,26 +1507,33 @@
         "skills.french": "Français", "skills.intermediate": "(Intermédiaire)",
         "skills.english": "Anglais", "skills.good": "(Bon niveau)",
         "exp.tag": "PARCOURS",
-        "exp.title": 'Expérience & <span class="bg-gradient-to-r from-tertiary to-primary bg-clip-text text-transparent">Formation</span>',
-        "exp.work": "Expérience", "exp.edu": "Formation",
-        "exp.current": "Actuel · 2026",
+        "exp.title": 'Expérience & <span class="bg-gradient-to-r from-primary via-[#7b2ff7] to-[#f72f8b] bg-clip-text text-transparent">Formation</span>',
+        "exp.internship": "Stage",
+        "exp.edu": "Formation",
+        "exp.current": "En cours · Année 2026",
         "exp.master.date": "2026 – Présent",
         "exp.master.title": "Master en Science des Données",
+        "exp.islaib.org": "ISLAIB (Institut Supérieur des Langues Appliquées et de l'Informatique de Béja)",
         "exp.pfe.date": "Fév 2026 – Juin 2026",
         "exp.pfe.title": "Stage PFE — Prédiction du Churn Client",
+        "exp.pfe.org": "Tunisie Telecom · Tunis, Tunisie",
         "exp.pfe.b1": "Conception d'un système d'aide à la décision complet suivant la méthodologie <strong>CRISP-DM</strong> pour identifier les clients à risque de résiliation.",
         "exp.pfe.b2": "Traitement de la qualité des données (valeurs manquantes, doublons, déséquilibre des classes) ; feature engineering (46 variables) et visualisation.",
-        "exp.pfe.b3": "Entraînement de plusieurs modèles de ML ; sélection de XGBoost atteignant 96% d'exactitude, 83% de précision, 93% de rappel et 88% de F1-score sur le churn.",
+        "exp.pfe.b3": "Entraînement de plusieurs modèles de ML ; sélection de XGBoost atteignant <strong class=\"text-primary font-semibold\">96% d'exactitude, 83% de précision, 93% de rappel et 88% de F1-score</strong> sur le churn.",
         "exp.pfe.b4": "Validation du modèle final sur 34 000 nouveaux clients réels, confirmant une performance robuste et stable.",
         "exp.pfe.b5": "Construction d'une application web Flask avec tableau de bord interactif et KPIs dynamiques.",
         "exp.pfa.date": "Juin 2025",
         "exp.pfa.title": "Stage PFA — Développeur .NET Full-Stack",
-        "exp.pfa.b1": "Développement d'une application web ASP.NET MVC basée sur les rôles (Administrateur, Utilisateur, Opérateur) pour la gestion des tests qualité industriels (Initial → QC → Client).",
-        "exp.pfa.b2": "Architecture avec Entity Framework, SQL Server, authentification BCrypt et suggestions automatiques de tests selon l'historique produit.",
-        "exp.pfa.b3": "Fonctionnalités de recherche avancée, analytique Chart.js et génération de rapports Excel EPPlus automatisée.",
+        "exp.pfa.org": "Asteelflash Tunisia · Soukra, Ariana, Tunisie",
+        "exp.pfa.b1": "Développement d'une application web ASP.NET MVC basée sur les rôles (Administrateur, Utilisateur, Opérateur) pour la gestion des tests qualité industriels (Initial → QC → Client) avec règles métiers strictes.",
+        "exp.pfa.b2": "Architecture avec Entity Framework, SQL Server et suggestions automatiques de tests selon l'historique produit.",
+        "exp.pfa.b3": "Fonctionnalités de recherche avancée, analytique Chart.js et génération de rapports Excel automatisée.",
+        "exp.bachelor.date": "2023 – 2026",
         "exp.bachelor.title": "Licence en Informatique (Génie Logiciel & Systèmes d'Information)",
         "exp.honors": "Diplômé avec Mention Bien 🎓",
-        "exp.bac.title": "Baccalauréat en Informatique",
+        "exp.bac.date": "2022 – 2023",
+        "exp.bac.title": "Baccalauréat en Sciences de l'Informatique",
+        "exp.bac.org": "Lycée Omrane Supérieur · Tunis",
         "proj.tag": "PORTFOLIO",
         "proj.title": 'Projets <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Phares</span>',
         "proj.badge.pfe": "PFE · Stage @ Tunisie Telecom",
@@ -1505,33 +1686,6 @@
       // 1. Apply active language
       setLang(currentLang);
 
-      // 2. Experience Tab Switcher
-      const btnWork = document.getElementById('btn-tab-work');
-      const btnEdu = document.getElementById('btn-tab-edu');
-      const contentWork = document.getElementById('tab-work-content');
-      const contentEdu = document.getElementById('tab-edu-content');
-
-      if (btnWork && btnEdu && contentWork && contentEdu) {
-        btnWork.addEventListener('click', () => {
-          btnWork.classList.add('bg-surface-container-high', 'text-on-surface');
-          btnWork.classList.remove('text-on-surface-variant');
-          btnEdu.classList.remove('bg-surface-container-high', 'text-on-surface');
-          btnEdu.classList.add('text-on-surface-variant');
-
-          contentWork.classList.remove('hidden');
-          contentEdu.classList.add('hidden');
-        });
-
-        btnEdu.addEventListener('click', () => {
-          btnEdu.classList.add('bg-surface-container-high', 'text-on-surface');
-          btnEdu.classList.remove('text-on-surface-variant');
-          btnWork.classList.remove('bg-surface-container-high', 'text-on-surface');
-          btnWork.classList.add('text-on-surface-variant');
-
-          contentEdu.classList.remove('hidden');
-          contentWork.classList.add('hidden');
-        });
-      }
 
       // 3. Project Accordion Toggles
       const accordions = document.querySelectorAll('.accordion-trigger');
