@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Premium Lab - Revenue Analytics, Financial Audit & Multi-Device Sync</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1024px;
+      height: 768px;
+      overflow: hidden;
+      background: #090d16;
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+      position: relative;
+    }
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#1e293b 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .glow-cyan {
+      position: absolute;
+      top: -100px;
+      right: -80px;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .glow-amber {
+      position: absolute;
+      bottom: -120px;
+      left: -80px;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 1024px;
+      height: 768px;
+      padding: 34px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 14px;
+    }
+    .header-tag {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #10b981;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    h2 span {
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header-sub {
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+    .badge {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .kpi-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .kpi-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .kpi-val {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 4px 0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .kpi-trend {
+      font-size: 0.72rem;
+      color: #34d399;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .grid-center {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      margin-top: 14px;
+      flex: 1;
+    }
+
+    .panel {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .panel-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .panel-pill {
+      font-size: 0.7rem;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: #94a3b8;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* SVG Chart */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 140px;
+      margin-bottom: 12px;
+    }
+    svg.sales-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* Top Products Table */
+    .top-products {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.74rem;
+    }
+    .top-products th {
+      text-align: left;
+      padding: 6px 8px;
+      color: #64748b;
+      font-family: 'JetBrains Mono', monospace;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .top-products td {
+      padding: 7px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #cbd5e1;
+    }
+    .top-products tr:last-child td {
+      border-bottom: none;
+    }
+    .rank-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.68rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.07);
+      color: #cbd5e1;
+    }
+    .rank-1 { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .rank-2 { background: rgba(148, 163, 184, 0.2); color: #e2e8f0; }
+    .rank-3 { background: rgba(180, 83, 9, 0.2); color: #d97706; }
+
+    /* LAN / Multi Device Architecture */
+    .sync-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .sync-host {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sync-host-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sync-node-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .sync-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .sync-sub {
+      font-size: 0.68rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #6ee7b7;
+    }
+
+    .lan-branches {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .lan-client {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+    .lan-client-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .lan-client-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 6px #10b981;
+    }
+    .lan-client-desc {
+      font-size: 0.65rem;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+
+    /* Audit Log list */
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .audit-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      padding: 6px 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 6px;
+      border-left: 2px solid #3b82f6;
+    }
+    .audit-item.green { border-color: #10b981; }
+    .audit-item.amber { border-color: #f59e0b; }
+    .audit-desc {
+      color: #cbd5e1;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .audit-time {
+      color: #64748b;
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.76rem;
+      color: #64748b;
+    }
+    .footer-tags {
+      display: flex;
+      gap: 14px;
+    }
+    .footer-tag {
+      font-family: 'JetBrains Mono', monospace;
+      color: #94a3b8;
+    }
+    .footer-tag strong {
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="glow-cyan"></div>
+  <div class="glow-amber"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <div class="header-tag">Executive Intelligence & Store Operations</div>
+        <h2>Financial Analytics <span>& Multi-Device Sync</span></h2>
+        <div class="header-sub">Daily revenue reconciliation, real-time inventory velocity & multi-terminal LAN networking</div>
+      </div>
+      <div class="badge">FASTAPI + SQLMODEL REAL-TIME</div>
+    </div>
+
+    <!-- KPI Row -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">Today's Revenue</div>
+        <div class="kpi-val">1,842.50 <span style="font-size: 0.85rem; color: #94a3b8;">TND</span></div>
+        <div class="kpi-trend">▲ +14.2% vs yesterday</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Completed Orders</div>
+        <div class="kpi-val">128 <span style="font-size: 0.85rem; color: #94a3b8;">txns</span></div>
+        <div class="kpi-trend">▲ 99.8% cash matched</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Avg. Basket Size</div>
+        <div class="kpi-val">14.39 <span style="font-size: 0.85rem; color: #94a3b8;">TND</span></div>
+        <div class="kpi-trend">▲ 3.2 items / ticket</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Net Profit Margin</div>
+        <div class="kpi-val" style="color: #34d399;">31.8%</div>
+        <div class="kpi-trend">▲ Verified FIFO costing</div>
+      </div>
+    </div>
+
+    <!-- Center Grid -->
+    <div class="grid-center">
+      <!-- Left: Revenue Chart + Top Products -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">📈 7-Day Revenue Velocity & Product Turnover</span>
+          <span class="panel-pill">REAL-TIME DB AGGREGATION</span>
+        </div>
+
+        <!-- SVG Line Chart -->
+        <div class="chart-container">
+          <svg class="sales-svg" viewBox="0 0 460 140">
+            <defs>
+              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#10b981" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#10b981" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+            <!-- Grid lines -->
+            <line x1="0" y1="30" x2="460" y2="30" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
+            <line x1="0" y1="70" x2="460" y2="70" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
+            <line x1="0" y1="110" x2="460" y2="110" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
+
+            <!-- Area & Line Path -->
+            <path d="M 10 110 L 80 85 L 150 95 L 220 50 L 290 65 L 360 35 L 430 20 L 430 130 L 10 130 Z" fill="url(#areaGrad)"/>
+            <path d="M 10 110 L 80 85 L 150 95 L 220 50 L 290 65 L 360 35 L 430 20" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- Data Points -->
+            <circle cx="10" cy="110" r="4" fill="#10b981"/>
+            <circle cx="80" cy="85" r="4" fill="#10b981"/>
+            <circle cx="150" cy="95" r="4" fill="#10b981"/>
+            <circle cx="220" cy="50" r="4" fill="#10b981"/>
+            <circle cx="290" cy="65" r="4" fill="#10b981"/>
+            <circle cx="360" cy="35" r="4" fill="#10b981"/>
+            <circle cx="430" cy="20" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/>
+
+            <!-- Labels -->
+            <text x="10" y="130" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">Mon</text>
+            <text x="80" y="130" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">Tue</text>
+            <text x="150" y="130" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">Wed</text>
+            <text x="220" y="130" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">Thu</text>
+            <text x="290" y="130" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">Fri</text>
+            <text x="360" y="130" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">Sat</text>
+            <text x="420" y="130" fill="#34d399" font-size="9" font-weight="700" font-family="'JetBrains Mono', monospace">Sun</text>
+            <text x="400" y="12" fill="#34d399" font-size="10" font-weight="700" font-family="'JetBrains Mono', monospace">1.84k TND</text>
+          </svg>
+        </div>
+
+        <!-- Top Selling Items -->
+        <table class="top-products">
+          <thead>
+            <tr>
+              <th style="width: 28px;">#</th>
+              <th>Top Item</th>
+              <th>Sold Qty</th>
+              <th>Total (TND)</th>
+              <th>Stock Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="rank-num rank-1">1</span></td>
+              <td><strong>Doliprane 1000mg Tabs</strong></td>
+              <td>142 pcs</td>
+              <td>454.40 TND</td>
+              <td><span style="color: #34d399; font-weight: 600;">Optimal (184)</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num rank-2">2</span></td>
+              <td><strong>Augmentin 1g Sachets</strong></td>
+              <td>58 pcs</td>
+              <td>377.00 TND</td>
+              <td><span style="color: #34d399; font-weight: 600;">Optimal (92)</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-num rank-3">3</span></td>
+              <td><strong>Physiodose Serum 40u</strong></td>
+              <td>49 pcs</td>
+              <td>235.20 TND</td>
+              <td><span style="color: #f59e0b; font-weight: 600;">Reorder Soon (14)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Right: Multi-Device Sync & Audit Trail -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">🌐 Multi-Device Sync & Audit</span>
+          <span class="panel-pill">0.0.0.0:8000 LAN</span>
+        </div>
+
+        <div class="sync-diagram">
+          <div class="sync-host">
+            <div class="sync-host-left">
+              <div class="sync-node-icon">🖥️</div>
+              <div>
+                <div class="sync-title">Central Host Server (FastAPI)</div>
+                <div class="sync-sub">http://192.168.1.100:8000 • SQLModel DB</div>
+              </div>
+            </div>
+            <span style="font-size: 0.65rem; color: #10b981; font-family: 'JetBrains Mono'; font-weight: 700;">ACTIVE</span>
+          </div>
+
+          <div class="lan-branches">
+            <div class="lan-client">
+              <div class="lan-client-name"><span class="lan-client-dot"></span> Cashier PC #1</div>
+              <div class="lan-client-desc">POS Terminal • Barcode Scanner</div>
+            </div>
+            <div class="lan-client">
+              <div class="lan-client-name"><span class="lan-client-dot"></span> Manager Tablet</div>
+              <div class="lan-client-desc">iPad Safari • Live Dashboard</div>
+            </div>
+            <div class="lan-client">
+              <div class="lan-client-name"><span class="lan-client-dot"></span> Warehouse PC</div>
+              <div class="lan-client-desc">Stock Inbound • Batch Receipt</div>
+            </div>
+            <div class="lan-client">
+              <div class="lan-client-name"><span class="lan-client-dot"></span> Thermal ESC/POS</div>
+              <div class="lan-client-desc">Instant 80mm Receipt Print</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 14px;">
+          <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px; font-weight: 700;">
+            Security Audit Trail
+          </div>
+          <div class="audit-list">
+            <div class="audit-item green">
+              <span class="audit-desc">[AUTH] Cashier logged in: Session #88</span>
+              <span class="audit-time">08:00:12</span>
+            </div>
+            <div class="audit-item amber">
+              <span class="audit-desc">[DISC] Price override: 10% authorized</span>
+              <span class="audit-time">11:24:39</span>
+            </div>
+            <div class="audit-item">
+              <span class="audit-desc">[REPORT] Daily Z-Report exported (CSV)</span>
+              <span class="audit-time">19:45:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-tags">
+        <span class="footer-tag">STACK: <strong>FastAPI • SQLModel • PostgreSQL • ESC/POS</strong></span>
+        <span class="footer-tag">REPORTS: <strong>Daily Z-Closing • CSV Invoicing • Top 10 Margin</strong></span>
+      </div>
+      <div>Designed & Developed by <strong>Ahmed Channoufi</strong></div>
+    </div>
+  </div>
+</body>
+</html>

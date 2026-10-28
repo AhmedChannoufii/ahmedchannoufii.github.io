@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Premium Lab / Magasin+ - Point of Sale & Store Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1024px;
+      height: 768px;
+      overflow: hidden;
+      background: #090d16;
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+      position: relative;
+    }
+    .glow-amber {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.18) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      filter: blur(40px);
+      pointer-events: none;
+    }
+    .glow-emerald {
+      position: absolute;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+      bottom: -150px;
+      left: -120px;
+      filter: blur(50px);
+      pointer-events: none;
+    }
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#1e293b 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 1024px;
+      height: 768px;
+      padding: 44px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 6px 16px;
+      border-radius: 50px;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+    }
+    .dot-live {
+      width: 8px;
+      height: 8px;
+      background: #f59e0b;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #f59e0b;
+    }
+    .brand-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #f59e0b;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .client-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #10b981;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .main-header {
+      margin-top: 15px;
+    }
+    .tagline {
+      font-size: 0.88rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+    }
+    h1 {
+      font-size: 2.7rem;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #f59e0b 0%, #10b981 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      margin-top: 8px;
+      max-width: 850px;
+      line-height: 1.5;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .stat-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 18px 16px;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .stat-card.c1::before { background: #f59e0b; }
+    .stat-card.c2::before { background: #10b981; }
+    .stat-card.c3::before { background: #38bdf8; }
+    .stat-card.c4::before { background: #a855f7; }
+
+    .stat-val {
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+    }
+    .stat-val.c1 { color: #f59e0b; }
+    .stat-val.c2 { color: #10b981; }
+    .stat-val.c3 { color: #38bdf8; }
+    .stat-val.c4 { color: #c084fc; }
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 8px;
+    }
+    .stat-sub {
+      font-size: 0.7rem;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .preview-box {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.85));
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 18px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .pipeline-steps {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .p-step {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .p-step-num {
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #f59e0b;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .p-step-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-top: 2px;
+    }
+    .p-arrow {
+      color: #475569;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .tech-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94a3b8;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-weight: 600;
+    }
+    .chip.highlight {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.35);
+      color: #f59e0b;
+    }
+    .author-credit {
+      font-size: 0.8rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .author-credit span {
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-amber"></div>
+  <div class="glow-emerald"></div>
+  <div class="grid-bg"></div>
+
+  <div class="container">
+    
+    <div class="top-bar">
+      <div class="brand-pill">
+        <span class="dot-live"></span>
+        <span class="brand-text">Retail SaaS & POS · FastAPI / Python</span>
+      </div>
+      <div class="client-badge">
+        <span>Premium Lab · Magasin+ v3.0</span>
+      </div>
+    </div>
+
+    <div class="main-header">
+      <div class="tagline">Enterprise Retail & Store Automation</div>
+      <h1>Point of Sale & <span>Store Management System</span></h1>
+      <p class="subtitle">Complete commercial retail management software featuring ultra-responsive POS checkout, automated stock inventory tracking, low-stock alerts, and multi-device local network connectivity.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card c1">
+        <div class="stat-val c1">&lt; 0.2s</div>
+        <div class="stat-label">Instant Checkout</div>
+        <div class="stat-sub">Keyboard shortcuts F2 / Ctrl+Enter</div>
+      </div>
+      <div class="stat-card c2">
+        <div class="stat-val c2">Live</div>
+        <div class="stat-label">Stock Monitoring</div>
+        <div class="stat-sub">Automated low-inventory alerts</div>
+      </div>
+      <div class="stat-card c3">
+        <div class="stat-val c3">Multi-LAN</div>
+        <div class="stat-label">Network Access</div>
+        <div class="stat-sub">PC, Tablet & POS multi-terminal</div>
+      </div>
+      <div class="stat-card c4">
+        <div class="stat-val c4">100%</div>
+        <div class="stat-label">Audit Traceability</div>
+        <div class="stat-sub">Thermal receipts & CSV reporting</div>
+      </div>
+    </div>
+
+    <div class="preview-box">
+      <div class="pipeline-steps">
+        <div class="p-step">
+          <div class="p-step-num">Step 01</div>
+          <div class="p-step-title">Barcode / Product Search</div>
+        </div>
+        <div class="p-arrow">→</div>
+        <div class="p-step">
+          <div class="p-step-num">Step 02</div>
+          <div class="p-step-title">Quick Cart & Discounts</div>
+        </div>
+        <div class="p-arrow">→</div>
+        <div class="p-step" style="border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.1);">
+          <div class="p-step-num" style="color:#f59e0b;">Step 03</div>
+          <div class="p-step-title" style="color:#fff;">Sale Validation & Ticket</div>
+        </div>
+        <div class="p-arrow">→</div>
+        <div class="p-step" style="border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.1);">
+          <div class="p-step-num" style="color:#10b981;">Step 04</div>
+          <div class="p-step-title" style="color:#fff;">Auto Stock Sync</div>
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 0.72rem; font-family:'JetBrains Mono'; color:#f59e0b; font-weight:700; text-transform:uppercase;">Backend Architecture</div>
+        <div style="font-size: 0.88rem; font-weight:700; color:#fff; margin-top:2px;">FastAPI · PostgreSQL · SQLModel</div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="tech-chips">
+        <span class="chip highlight">Python</span>
+        <span class="chip highlight">FastAPI</span>
+        <span class="chip highlight">PostgreSQL</span>
+        <span class="chip">SQLModel</span>
+        <span class="chip">JWT Auth</span>
+        <span class="chip">BCrypt</span>
+        <span class="chip">POS Cashier</span>
+        <span class="chip">CSV Reports</span>
+      </div>
+      <div class="author-credit">
+        Designed & Built by <span>Ahmed Channoufi</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -301,7 +301,7 @@
         </div>
 
         <!-- Download CV Button -->
-        <a id="btn-cv-download" href="CV_Ahmed_Channoufi_EN.pdf" download class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-container text-on-primary-container text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-on-primary shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(78,222,163,0.5)] transition-all transform hover:-translate-y-0.5 focus:outline-none">
+        <a id="btn-cv-download" href="Ahmed_Channoufi_CV_EN.pdf" download class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-container text-on-primary-container text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-on-primary shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(78,222,163,0.5)] transition-all transform hover:-translate-y-0.5 focus:outline-none">
           <span class="material-symbols-outlined text-[16px]">download</span>
           <span class="hidden lg:inline" data-i18n="nav.cv">Download CV</span>
           <span class="lg:hidden">CV</span>
@@ -446,6 +446,20 @@
       <div class="mt-16">
         <span class="text-xs font-mono text-outline tracking-widest uppercase block mb-4" data-i18n="about.certs">CERTIFICATIONS</span>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- Cert 0: Cisco Prompt Like an Engineer -->
+          <div onclick="openCert('cisco_prompt_engineer.png')" class="cursor-pointer group p-5 rounded-xl bg-surface-container-low/80 border border-white/5 hover:border-primary/40 hover:bg-surface-container transition-all shadow-md hover:-translate-y-0.5 flex items-start justify-between">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-2xl shrink-0">🤖</div>
+              <div>
+                <h3 class="text-base font-semibold text-on-surface group-hover:text-primary transition-colors">Prompt Like an Engineer</h3>
+                <p class="text-sm text-on-surface-variant mt-0.5"><span data-i18n="cert.prompt.date">Cisco Networking Academy · Oct 2026</span></p>
+              </div>
+            </div>
+            <button class="text-xs font-mono text-primary hover:text-primary-fixed inline-flex items-center gap-1 shrink-0 pt-1" type="button">
+              <span data-i18n="cert.view">View Certificate ↗</span>
+            </button>
+          </div>
 
           <!-- Cert 1: Cisco Python -->
           <div onclick="openCert('cisco_ds.png')" class="cursor-pointer group p-5 rounded-xl bg-surface-container-low/80 border border-white/5 hover:border-primary/40 hover:bg-surface-container transition-all shadow-md hover:-translate-y-0.5 flex items-start justify-between">
@@ -1421,6 +1435,7 @@
         "about.stat1": "Projects Shipped", "about.stat2": "Languages Spoken",
         "about.certs": "CERTIFICATIONS",
         "cert.view": "View Certificate ↗",
+        "cert.prompt.date": "Cisco Networking Academy · Oct 2026",
         "cert.hplife.date": "HP LIFE · April 2026",
         "cert.math.date": "365 Data Science · Dec 2024",
         "skills.tag": "WHAT I KNOW",
@@ -1538,6 +1553,7 @@
         "about.stat1": "Projets réalisés", "about.stat2": "Langues parlées",
         "about.certs": "CERTIFICATIONS",
         "cert.view": "Voir le Certificat ↗",
+        "cert.prompt.date": "Cisco Networking Academy · Oct 2026",
         "cert.hplife.date": "HP LIFE · Avril 2026",
         "cert.math.date": "365 Data Science · Déc 2024",
         "skills.tag": "CE QUE JE MAÎTRISE",
@@ -1696,13 +1712,13 @@
         btnFr.classList.remove('text-on-surface-variant');
         btnEn.classList.remove('bg-surface-container-highest', 'text-primary');
         btnEn.classList.add('text-on-surface-variant');
-        document.getElementById('btn-cv-download').href = 'CV_Ahmed_Channoufi.pdf';
+        document.getElementById('btn-cv-download').href = 'Ahmed_Channoufi_CV_FR.pdf';
       } else {
         btnEn.classList.add('bg-surface-container-highest', 'text-primary');
         btnEn.classList.remove('text-on-surface-variant');
         btnFr.classList.remove('bg-surface-container-highest', 'text-primary');
         btnFr.classList.add('text-on-surface-variant');
-        document.getElementById('btn-cv-download').href = 'CV_Ahmed_Channoufi_EN.pdf';
+        document.getElementById('btn-cv-download').href = 'Ahmed_Channoufi_CV_EN.pdf';
       }
 
       // Apply text translations

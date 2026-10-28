@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Premium Lab - Digital Subscriptions & AI Ecosystem Boutique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1024px;
+      height: 768px;
+      overflow: hidden;
+      background: #080a14;
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+      position: relative;
+    }
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#1e1b4b 1.2px, transparent 1.2px);
+      background-size: 26px 26px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .glow-purple {
+      position: absolute;
+      top: -120px;
+      left: 180px;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .glow-blue {
+      position: absolute;
+      bottom: -100px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 1024px;
+      height: 768px;
+      padding: 38px 46px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(139, 92, 246, 0.5);
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    }
+    .brand-text {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .brand-tag {
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #a78bfa;
+    }
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      padding: 7px 16px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #c4b5fd;
+      font-weight: 700;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #8b5cf6;
+      box-shadow: 0 0 10px #8b5cf6;
+    }
+
+    .hero-section {
+      margin-top: 10px;
+    }
+    .eyebrow {
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #8b5cf6;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      max-width: 820px;
+      line-height: 1.5;
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .kpi-card {
+      background: rgba(14, 18, 32, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent, #8b5cf6), transparent);
+    }
+    .kpi-val {
+      font-size: 1.75rem;
+      font-weight: 900;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+    }
+    .kpi-sub {
+      font-size: 0.74rem;
+      color: #94a3b8;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .offer-pill {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .offer-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .offer-price {
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #a78bfa;
+      margin: 6px 0;
+    }
+    .offer-features {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      line-height: 1.35;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+    .footer-tags {
+      display: flex;
+      gap: 8px;
+    }
+    .tech-tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="glow-purple"></div>
+  <div class="glow-blue"></div>
+
+  <div class="container">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="brand-wrap">
+        <img src="plab_logo.jpg" alt="Premium Lab Logo" class="logo-img">
+        <div>
+          <div class="brand-text">Premium Lab</div>
+          <div class="brand-tag">premiumlab.me • Official Boutique</div>
+        </div>
+      </div>
+      <div class="live-badge">
+        <span class="live-dot"></span>
+        PRODUCTION E-COMMERCE & CRM
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero-section">
+      <div class="eyebrow">DIGITAL SUBSCRIPTION BOUTIQUE & CLIENT CRM</div>
+      <h1>AI & Digital Subscriptions <span>Without Payment Barriers</span></h1>
+      <p class="hero-desc">
+        A full-stack commercial SaaS storefront and CRM solving local payment limitations for Tunisians. Direct purchase of global AI suites, automated order qualification, Firebase real-time subscription lifecycle tracking, and 1-click WhatsApp customer renewal.
+      </p>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="kpi-row">
+      <div class="kpi-card" style="--accent: #8b5cf6;">
+        <div class="kpi-val" style="color: #a78bfa;">1,200+</div>
+        <div class="kpi-sub">Active Subscriptions Served</div>
+      </div>
+      <div class="kpi-card" style="--accent: #3b82f6;">
+        <div class="kpi-val" style="color: #60a5fa;">&lt; 45 min</div>
+        <div class="kpi-sub">Average License Delivery</div>
+      </div>
+      <div class="kpi-card" style="--accent: #10b981;">
+        <div class="kpi-val" style="color: #34d399;">100% Local</div>
+        <div class="kpi-sub">D17 • Flouci • Bank • Binance</div>
+      </div>
+      <div class="kpi-card" style="--accent: #f59e0b;">
+        <div class="kpi-val" style="color: #fbbf24;">99.8%</div>
+        <div class="kpi-sub">Customer Retention & Rating</div>
+      </div>
+    </div>
+
+    <!-- Live Subscriptions Catalog Mock -->
+    <div class="offers-grid">
+      <div class="offer-pill">
+        <div class="offer-title">🤖 Google AI Pro</div>
+        <div class="offer-price">20 DT <span style="font-size: 0.7rem; color: #94a3b8;">/ 1 an</span></div>
+        <div class="offer-features">Gemini 1.5 Pro, 1M token context, NotebookLM 300 sources & Workspace AI.</div>
+      </div>
+      <div class="offer-pill">
+        <div class="offer-title">🎨 Canva Pro</div>
+        <div class="offer-price">5 DT <span style="font-size: 0.7rem; color: #94a3b8;">/ mois</span></div>
+        <div class="offer-features">Magic Studio AI, 100M+ assets, background remover & full HD exports.</div>
+      </div>
+      <div class="offer-pill">
+        <div class="offer-title">▶️ YouTube Premium</div>
+        <div class="offer-price">10 DT <span style="font-size: 0.7rem; color: #94a3b8;">/ mois</span></div>
+        <div class="offer-features">Zero ads, offline video downloads, background audio & YouTube Music.</div>
+      </div>
+      <div class="offer-pill" style="border-color: rgba(139, 92, 246, 0.4); background: rgba(139, 92, 246, 0.08);">
+        <div class="offer-title">🎓 Student Pack</div>
+        <div class="offer-price" style="color: #c4b5fd;">30 DT <span style="font-size: 0.7rem; color: #94a3b8;">/ 1 an</span></div>
+        <div class="offer-features">Bundle: Google AI Pro (1 Year) + Canva Pro (1 Year) with 7/7 priority support.</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-tags">
+        <span class="tech-tag">Tailwind CSS</span>
+        <span class="tech-tag">Firebase Firestore</span>
+        <span class="tech-tag">Web3Forms Lead Engine</span>
+        <span class="tech-tag">WhatsApp API Automation</span>
+        <span class="tech-tag">Chart.js Finance</span>
+      </div>
+      <div>Engineered & Operated by <strong>Ahmed Channoufi</strong></div>
+    </div>
+  </div>
+</body>
+</html>

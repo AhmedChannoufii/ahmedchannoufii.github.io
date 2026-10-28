@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Asteelflash - Multi-Role Authorization & Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1024px;
+      height: 768px;
+      overflow: hidden;
+      background: #090e1a;
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+      position: relative;
+    }
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#1e293b 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 1024px;
+      height: 768px;
+      padding: 36px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 16px;
+    }
+    .header-tag {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #38bdf8;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    h2 span {
+      background: linear-gradient(135deg, #38bdf8, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header-sub {
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+    .rbac-badge {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      margin-top: 14px;
+    }
+    .card-panel {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+    }
+    .card-heading {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+    }
+    th {
+      text-align: left;
+      padding: 8px 10px;
+      background: rgba(30, 41, 59, 0.6);
+      color: #94a3b8;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #cbd5e1;
+    }
+    .role-name { font-weight: 700; color: #fff; }
+    .badge-perm {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+    }
+
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .feature-box {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .feat-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .feat-row:last-child { margin-bottom: 0; }
+    .icon-square {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .icon-chart { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+    .icon-excel { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+    .icon-lock { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    .feat-info h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .feat-info p {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .bottom-bar {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    .bottom-bar strong {
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+
+  <div class="container">
+    
+    <div class="header">
+      <div>
+        <div class="header-tag">Enterprise Security & Reporting</div>
+        <h2>Multi-Role Authorization <span>& Operational Analytics</span></h2>
+        <div class="header-sub">Role-Based Access Control (RBAC), live Chart.js KPI telemetry, and automated Excel exports</div>
+      </div>
+      <div class="rbac-badge">
+        Secure BCrypt Authentication
+      </div>
+    </div>
+
+    <div class="main-grid">
+      
+      <div class="card-panel">
+        <div class="card-heading">Role Permissions Matrix</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Allowed Actions</th>
+              <th>Security Tier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="role-name">Administrator</td>
+              <td>User management, global logs, system KPIs, export</td>
+              <td><span class="badge-perm" style="background:rgba(239,68,68,0.15); color:#f87171;">Full Control</span></td>
+            </tr>
+            <tr>
+              <td class="role-name">Supervisor</td>
+              <td>Executes all 3 test types, test overrides, supervisor signoff</td>
+              <td><span class="badge-perm" style="background:rgba(245,158,11,0.15); color:#fbbf24;">Supervisor</span></td>
+            </tr>
+            <tr>
+              <td class="role-name">Engineer</td>
+              <td>Level 3 Client Test execution & re-tests</td>
+              <td><span class="badge-perm">Client Clearance</span></td>
+            </tr>
+            <tr>
+              <td class="role-name">Technician</td>
+              <td>Level 1 Initial Test & Level 2 Quality Control</td>
+              <td><span class="badge-perm">Internal QC</span></td>
+            </tr>
+            <tr>
+              <td class="role-name">User / Operator</td>
+              <td>Product creation, multi-criteria test search</td>
+              <td><span class="badge-perm" style="background:rgba(255,255,255,0.08); color:#cbd5e1;">Basic Access</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="right-col">
+        
+        <div class="feature-box">
+          <div class="feat-row">
+            <div class="icon-square icon-chart">📊</div>
+            <div class="feat-info">
+              <h4>Real-Time Chart.js Analytics</h4>
+              <p>Dynamic KPI charts breaking down test failure rates, machine utilization, and defect categories across production lines.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-box">
+          <div class="feat-row">
+            <div class="icon-square icon-excel">📑</div>
+            <div class="feat-info">
+              <h4>Automated Excel Export (EPPlus)</h4>
+              <p>One-click audit reports generating styled spreadsheets with date filtering, operator signatures, and batch traceability.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-box">
+          <div class="feat-row">
+            <div class="icon-square icon-lock">🔒</div>
+            <div class="feat-info">
+              <h4>Encrypted Authentication</h4>
+              <p>Salted BCrypt password hashing, session expiration handling, and full audit logging of administrative changes.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="bottom-bar">
+      <div>Enterprise Grade: <strong>High-concurrency SQL Server architecture</strong> with Entity Framework ORM.</div>
+      <div style="font-family:'JetBrains Mono'; color:#10b981; font-weight:700;">Tested in Factory Conditions</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

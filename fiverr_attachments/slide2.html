@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slide 2 - Model Training & Algorithm Benchmark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1024px;
+      height: 768px;
+      overflow: hidden;
+      background: #070c18;
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+      position: relative;
+    }
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#1e293b 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .glow-top {
+      position: absolute;
+      width: 600px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+      top: -120px;
+      left: 200px;
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 1024px;
+      height: 768px;
+      padding: 36px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 16px;
+    }
+    .header-tag {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #00f5d4;
+      margin-bottom: 4px;
+    }
+    h2 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    h2 span {
+      background: linear-gradient(135deg, #00f5d4, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header-sub {
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+    .algo-pill {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(0, 245, 212, 0.3);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #00f5d4;
+      font-weight: 700;
+    }
+
+    /* Content Layout (2 Columns) */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      margin-top: 14px;
+    }
+
+    /* Left: Benchmark Table */
+    .table-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 18px 20px;
+      backdrop-filter: blur(10px);
+    }
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .card-heading {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+    }
+    th {
+      text-align: left;
+      padding: 7px 8px;
+      background: rgba(30, 41, 59, 0.6);
+      color: #94a3b8;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    td {
+      padding: 8px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #cbd5e1;
+    }
+    tr.best-row {
+      background: rgba(0, 245, 212, 0.08);
+      border-left: 3px solid #00f5d4;
+    }
+    tr.best-row td {
+      color: #fff;
+      font-weight: 700;
+    }
+    .badge-sel {
+      background: #00f5d4;
+      color: #070c18;
+      font-size: 0.6rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 800;
+      margin-left: 4px;
+    }
+    .metric-high { color: #00f5d4; font-weight: 700; }
+    .gap-low { color: #38bdf8; }
+
+    /* Right Column: Preprocessing & Features */
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .box-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 16px 20px;
+      backdrop-filter: blur(10px);
+    }
+    /* SMOTE bars */
+    .dist-bar-group {
+      margin-top: 10px;
+    }
+    .dist-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      margin-bottom: 4px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .bar-track {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .bar-fill-green { width: 84.6%; height: 100%; background: #00f5d4; }
+    .bar-fill-red { width: 15.4%; height: 100%; background: #f43f5e; }
+    .smote-pill-banner {
+      background: rgba(123, 47, 247, 0.12);
+      border: 1px solid rgba(123, 47, 247, 0.35);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      color: #c084fc;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* Top Features */
+    .feat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 0.75rem;
+    }
+    .feat-name {
+      font-family: 'JetBrains Mono', monospace;
+      color: #cbd5e1;
+      font-size: 0.72rem;
+    }
+    .feat-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    /* Bottom Summary Bar */
+    .bottom-summary {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    .bottom-summary strong {
+      color: #00f5d4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+  <div class="glow-top"></div>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <div class="header-tag">Machine Learning Pipeline · Step 04</div>
+        <h2>Model Training & <span>Algorithm Benchmark</span></h2>
+        <div class="header-sub">Systematic evaluation of 8 ML models under stratified cross-validation</div>
+      </div>
+      <div class="algo-pill">
+        CRISP-DM Verified
+      </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="content-grid">
+      
+      <!-- Left: Benchmark Table -->
+      <div class="table-card">
+        <div class="card-title-row">
+          <div class="card-heading">Model Comparison (Test Set)</div>
+          <span style="font-size:0.68rem; color:#64748b; font-family:'JetBrains Mono';">F1-Score Ranked</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>Accuracy</th>
+              <th>Precision</th>
+              <th>Recall</th>
+              <th>F1-Score</th>
+              <th>Overfit Gap</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="best-row">
+              <td>XGBoost <span class="badge-sel">BEST</span></td>
+              <td class="metric-high">96.0%</td>
+              <td class="metric-high">83.2%</td>
+              <td class="metric-high">93.1%</td>
+              <td class="metric-high">88.0%</td>
+              <td class="gap-low">1.46%</td>
+            </tr>
+            <tr>
+              <td>LightGBM</td>
+              <td>94.8%</td>
+              <td>81.5%</td>
+              <td>90.4%</td>
+              <td>85.7%</td>
+              <td class="gap-low">1.82%</td>
+            </tr>
+            <tr>
+              <td>CatBoost</td>
+              <td>94.2%</td>
+              <td>80.9%</td>
+              <td>89.8%</td>
+              <td>85.1%</td>
+              <td class="gap-low">2.05%</td>
+            </tr>
+            <tr>
+              <td>Random Forest</td>
+              <td>93.5%</td>
+              <td>79.2%</td>
+              <td>88.1%</td>
+              <td>83.4%</td>
+              <td>3.10%</td>
+            </tr>
+            <tr>
+              <td>Gradient Boost</td>
+              <td>92.8%</td>
+              <td>77.6%</td>
+              <td>86.5%</td>
+              <td>81.8%</td>
+              <td>2.90%</td>
+            </tr>
+            <tr>
+              <td>Extra Trees</td>
+              <td>91.2%</td>
+              <td>75.1%</td>
+              <td>83.4%</td>
+              <td>79.0%</td>
+              <td>4.20%</td>
+            </tr>
+            <tr>
+              <td>SVM (RBF Kernel)</td>
+              <td>89.0%</td>
+              <td>71.4%</td>
+              <td>79.2%</td>
+              <td>75.1%</td>
+              <td>2.40%</td>
+            </tr>
+            <tr>
+              <td>Logistic Regression</td>
+              <td>86.4%</td>
+              <td>68.1%</td>
+              <td>75.3%</td>
+              <td>71.5%</td>
+              <td>0.95%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Right: Preprocessing & Top Features -->
+      <div class="right-col">
+        
+        <!-- SMOTE Rebalancing Box -->
+        <div class="box-card">
+          <div class="card-heading">Dataset Class Rebalancing</div>
+          <div class="dist-bar-group">
+            <div class="dist-label-row">
+              <span>Non-Churn (Class 0)</span>
+              <span style="color:#00f5d4;">84.6% (169,275 rows)</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill-green"></div>
+            </div>
+            <div class="dist-label-row">
+              <span>Churn (Class 1)</span>
+              <span style="color:#f43f5e;">15.4% (30,762 rows)</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill-red"></div>
+            </div>
+          </div>
+          <div class="smote-pill-banner">
+            ⚡ <strong>SMOTE Synthesized:</strong> Rebalanced minority class in training without losing majority distribution patterns.
+          </div>
+        </div>
+
+        <!-- Top Features Box -->
+        <div class="box-card">
+          <div class="card-heading">Top Predictive Features (SHAP)</div>
+          <div class="feat-item">
+            <span class="feat-name">1. data_usage_delta_m1_m3</span>
+            <span class="feat-pct">28.4%</span>
+          </div>
+          <div class="feat-item">
+            <span class="feat-name">2. recharge_recency_days</span>
+            <span class="feat-pct">21.2%</span>
+          </div>
+          <div class="feat-item">
+            <span class="feat-name">3. voice_out_in_call_ratio</span>
+            <span class="feat-pct">17.8%</span>
+          </div>
+          <div class="feat-item">
+            <span class="feat-name">4. active_months_history</span>
+            <span class="feat-pct">13.5%</span>
+          </div>
+          <div class="feat-item">
+            <span class="feat-name">5. ussd_recharge_frequency</span>
+            <span class="feat-pct">10.6%</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Summary Bar -->
+    <div class="bottom-summary">
+      <div>Selection Decision: <strong>XGBoost</strong> delivered optimal balance between <strong>93.1% Churn Recall</strong> and ultra-fast inference (0.93s).</div>
+      <div style="font-family:'JetBrains Mono'; font-weight:700; color:#38bdf8;">Training Complete · Ready for Prod</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
